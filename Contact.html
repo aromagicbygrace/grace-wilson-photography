@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Grace Wilson's Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eee7d8;
+    --ink-dim:#b9b2a2;
+    --ground:#15150f;
+    --ground-2:#1c1c14;
+    --line:#3a392c;
+    --moss:#6b7a52;
+    --moss-dim:#4c5a3a;
+    --max:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2{font-family:'Newsreader', serif; font-weight:500; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; left:0; right:0; z-index:50;
+    padding:16px 0;
+    background:rgba(21,21,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:'Newsreader', serif; font-size:1.3rem; font-weight:500; text-decoration:none;}
+  .brand em{font-style:italic; color:var(--moss);}
+  .navlinks{display:flex; gap:36px; font-size:0.92rem; color:var(--ink-dim);}
+  .navlinks a{text-decoration:none; transition:color .2s ease;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks a.active{color:var(--ink);}
+  @media (max-width:900px){ .navlinks{display:none;} }
+
+  /* ---------- Page head ---------- */
+  .page-head{padding:96px 0 24px;}
+  .page-head p.eyebrow{color:var(--ink-dim); font-size:0.9rem; margin-bottom:14px;}
+  .page-head h1{font-size:clamp(2.4rem, 6vw, 4rem); max-width:12ch; line-height:1.05;}
+
+  /* ---------- Contact ---------- */
+  .contact{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    border-top:1px solid var(--line);
+    padding:56px 0 120px;
+  }
+  .contact-note{color:var(--ink-dim); margin-top:8px; max-width:42ch; font-size:1rem;}
+  .contact-details{display:flex; flex-direction:column; gap:22px; margin-top:32px;}
+  .contact-details a{
+    text-decoration:none; font-size:1.1rem;
+    border-bottom:1px solid var(--line); padding-bottom:6px;
+    width:fit-content; transition:border-color .2s ease, color .2s ease;
+  }
+  .contact-details a:hover{border-color:var(--moss); color:var(--moss);}
+
+  form{display:flex; flex-direction:column; gap:20px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field label{font-size:0.82rem; color:var(--ink-dim);}
+  .field input, .field textarea, .field select{
+    background:transparent;
+    border:none; border-bottom:1px solid var(--line);
+    color:var(--ink); font-family:inherit; font-size:1rem;
+    padding:10px 2px;
+    resize:vertical;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{
+    outline:none; border-color:var(--moss);
+  }
+  .submit-btn{
+    margin-top:12px;
+    align-self:flex-start;
+    background:var(--moss-dim);
+    color:var(--ink);
+    border:none;
+    padding:14px 30px;
+    border-radius:999px;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .submit-btn:hover{background:var(--moss);}
+
+  footer{
+    border-top:1px solid var(--line); padding:32px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.82rem; color:var(--ink-dim); flex-wrap:wrap; gap:12px;
+  }
+  footer a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease;}
+  footer a:hover{color:var(--ink);}
+
+  @media (max-width:900px){
+    .contact{grid-template-columns:1fr; gap:40px;}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="index.html" class="brand">Grace Wilson's <em>Photography</em></a>
+      <div class="navlinks">
+        <a href="index.html">Welcome</a>
+        <a href="about.html">About Me</a>
+        <a href="portraits.html">Portraits</a>
+        <a href="prints.html">Prints for Sale</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Get in touch</p>
+      <h1>Let's talk.</h1>
+    </div>
+
+    <div class="contact">
+      <div>
+        <p class="contact-note">Looking to purchase any of my prints? Feel free to just email me directly.</p>
+        <div class="contact-details">
+          <a href="mailto:g.tootsphotography@gmail.com">g.tootsphotography@gmail.com</a>
+          <a href="https://www.instagram.com/gracecwilsonphotography" target="_blank" rel="noopener">@gracecwilsonphotography on Instagram</a>
+        </div>
+      </div>
+      <form>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@email.com">
+        </div>
+        <div class="field">
+          <label for="type">What are you interested in?</label>
+          <select id="type">
+            <option>Portrait session (single/couple)</option>
+            <option>Animal / wildlife image</option>
+            <option>Vehicle image</option>
+            <option>Landscape image</option>
+            <option>Building / architecture image</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">Message</label>
+          <textarea id="msg" rows="4" placeholder="Tell me a bit about what you have in mind"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send message</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Grace Wilson's Photography</span>
+    <div class="socials">
+      <a href="mailto:g.tootsphotography@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('This is a template — connect this form to your email or a form service (e.g. Formspree) to receive messages.');
+  });
+</script>
+
+</body>
+</html>
+

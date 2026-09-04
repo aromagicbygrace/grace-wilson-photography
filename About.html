@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me — Grace Wilson's Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eee7d8;
+    --ink-dim:#b9b2a2;
+    --ground:#15150f;
+    --ground-2:#1c1c14;
+    --line:#3a392c;
+    --moss:#6b7a52;
+    --moss-dim:#4c5a3a;
+    --max:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Newsreader', serif; font-weight:500; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; left:0; right:0; z-index:50;
+    padding:16px 0;
+    background:rgba(21,21,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:'Newsreader', serif; font-size:1.3rem; font-weight:500; text-decoration:none;}
+  .brand em{font-style:italic; color:var(--moss);}
+  .navlinks{display:flex; gap:36px; font-size:0.92rem; color:var(--ink-dim);}
+  .navlinks a{text-decoration:none; transition:color .2s ease;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks a.active{color:var(--ink);}
+  @media (max-width:900px){ .navlinks{display:none;} }
+
+  /* ---------- Page head ---------- */
+  .page-head{padding:96px 0 40px;}
+  .page-head p.eyebrow{color:var(--ink-dim); font-size:0.9rem; margin-bottom:14px;}
+  .page-head h1{font-size:clamp(2.4rem, 6vw, 4rem); max-width:16ch; line-height:1.05;}
+
+  /* ---------- About body ---------- */
+  .about{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:56px;
+    align-items:start;
+    padding:40px 0 100px;
+    border-top:1px solid var(--line);
+  }
+  .about-gallery{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .about-gallery img{
+    width:100%; height:100%;
+    object-fit:cover;
+    aspect-ratio:4/5;
+    border-radius:2px;
+  }
+  .about-gallery img:first-child{grid-column:1 / -1; aspect-ratio:16/10;}
+  .about p{color:var(--ink-dim); margin-bottom:20px; max-width:58ch; font-size:1rem;}
+  .about h2{font-size:clamp(1.7rem,3vw,2.2rem); margin-bottom:22px; color:var(--ink);}
+  .about-stats{display:flex; gap:40px; margin-top:32px; flex-wrap:wrap;}
+  .about-stats div strong{display:block; font-family:'Newsreader',serif; font-size:1.7rem; font-weight:500; color:var(--ink);}
+  .about-stats div span{font-size:0.82rem; color:var(--ink-dim);}
+
+  /* ---------- What I shoot ---------- */
+  .subjects{
+    border-top:1px solid var(--line);
+    padding:80px 0 120px;
+  }
+  .subjects h2{font-size:clamp(1.8rem,3.4vw,2.4rem); margin-bottom:40px;}
+  .subject-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+  }
+  .subject-card{text-align:left;}
+  .subject-card img{
+    width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:2px; margin-bottom:12px;
+  }
+  .subject-card h3{font-size:1rem; font-weight:500; margin-bottom:4px;}
+  .subject-card p{font-size:0.82rem; color:var(--ink-dim);}
+
+  /* ---------- CTA ---------- */
+  .cta-strip{border-top:1px solid var(--line); padding:80px 0; text-align:left;}
+  .cta-strip h2{font-size:clamp(1.8rem,3.4vw,2.4rem); max-width:18ch; margin-bottom:16px;}
+  .cta-strip p{color:var(--ink-dim); max-width:50ch; margin-bottom:28px;}
+  .cta-strip a.email-btn{
+    display:inline-block; background:var(--moss-dim); color:var(--ink);
+    text-decoration:none; padding:14px 30px; border-radius:999px;
+    font-size:0.95rem; transition:background .2s ease;
+  }
+  .cta-strip a.email-btn:hover{background:var(--moss);}
+
+  footer{
+    border-top:1px solid var(--line); padding:32px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.82rem; color:var(--ink-dim); flex-wrap:wrap; gap:12px;
+  }
+  footer a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease;}
+  footer a:hover{color:var(--ink);}
+
+  @media (max-width:900px){
+    .about{grid-template-columns:1fr;}
+    .subject-grid{grid-template-columns:repeat(3,1fr); row-gap:32px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .subject-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="index.html" class="brand">Grace Wilson's <em>Photography</em></a>
+      <div class="navlinks">
+        <a href="index.html">Welcome</a>
+        <a href="about.html" class="active">About Me</a>
+        <a href="portraits.html">Portraits</a>
+        <a href="prints.html">Prints for Sale</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">About Grace</p>
+      <h1>This started with my dad's cameras.</h1>
+    </div>
+
+    <div class="about">
+      <div class="about-gallery">
+        <img src="images/landscape-highland-loch.jpg" alt="Highland loch and mountains">
+        <img src="images/portrait-baby-toycar.jpg" alt="Portrait work">
+        <img src="images/vehicle-red-bmw.jpg" alt="Vehicle photography">
+      </div>
+      <div>
+        <h2>Why I picked up a camera</h2>
+        <p>I picked up photography in 2017, after I lost my dad. He was a photographer himself, and he left me some of his cameras. Learning to use them became my way of staying close to something he loved — and it turned into a real, lasting passion of my own.</p>
+        <p>Mobility issues mean I can't take on large events, so I've built my practice around what I can do well: small, low-key portrait sessions for single people or couples, plus getting out to photograph animals, vehicles, landscapes, and buildings. Everything is edited and sold as a digital download, licensed for you to use as you please — no restrictions, no chasing prints.</p>
+        <div class="about-stats">
+          <div><strong>2017</strong><span>where it started</span></div>
+          <div><strong>5</strong><span>subjects I shoot</span></div>
+          <div><strong>Digital</strong><span>download, yours to use</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subjects">
+    <div class="wrap">
+      <h2>What I shoot</h2>
+      <div class="subject-grid">
+        <div class="subject-card">
+          <img src="images/portrait-baby-football.jpg" alt="Portrait photography">
+          <h3>Portraits</h3>
+          <p>Single or couple sessions</p>
+        </div>
+        <div class="subject-card">
+          <img src="images/animal-wood-duck.jpg" alt="Animal photography">
+          <h3>Animals</h3>
+          <p>Wild and domestic</p>
+        </div>
+        <div class="subject-card">
+          <img src="images/vehicle-blue-mondeo.jpg" alt="Vehicle photography">
+          <h3>Vehicles</h3>
+          <p>Cars, bikes &amp; more</p>
+        </div>
+        <div class="subject-card">
+          <img src="images/landscape-sunset-loch.jpg" alt="Landscape photography">
+          <h3>Landscape</h3>
+          <p>Wide scenes, natural light</p>
+        </div>
+        <div class="subject-card">
+          <img src="images/building-church-door.jpg" alt="Building and architecture photography">
+          <h3>Buildings</h3>
+          <p>Old and new architecture</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cta-strip">
+      <h2>Want to see the full collection?</h2>
+      <p>Every image I've got ready is on the prints page, licensed as a digital download you're free to use as you please.</p>
+      <a class="email-btn" href="prints.html">Browse prints for sale</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Grace Wilson's Photography</span>
+    <div class="socials">
+      <a href="mailto:g.tootsphotography@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

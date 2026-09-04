@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portraits — Grace Wilson's Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eee7d8;
+    --ink-dim:#b9b2a2;
+    --ground:#15150f;
+    --ground-2:#1c1c14;
+    --line:#3a392c;
+    --moss:#6b7a52;
+    --moss-dim:#4c5a3a;
+    --max:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Newsreader', serif; font-weight:500; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; left:0; right:0; z-index:50;
+    padding:16px 0;
+    background:rgba(21,21,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:'Newsreader', serif; font-size:1.3rem; font-weight:500; text-decoration:none;}
+  .brand em{font-style:italic; color:var(--moss);}
+  .navlinks{display:flex; gap:36px; font-size:0.92rem; color:var(--ink-dim);}
+  .navlinks a{text-decoration:none; transition:color .2s ease;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks a.active{color:var(--ink);}
+  @media (max-width:900px){ .navlinks{display:none;} }
+
+  /* ---------- Page head ---------- */
+  .page-head{padding:96px 0 56px; border-bottom:1px solid var(--line);}
+  .page-head p.eyebrow{color:var(--ink-dim); font-size:0.9rem; margin-bottom:14px; max-width:44ch;}
+  .page-head h1{font-size:clamp(2.4rem, 6vw, 4rem); max-width:14ch; line-height:1.05;}
+  .page-head .note{margin-top:22px; color:var(--ink-dim); max-width:56ch; font-size:1rem;}
+  .page-head .note a{color:var(--moss); text-decoration:underline;}
+
+  /* ---------- Portrait gallery ---------- */
+  .portrait-gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    padding:56px 0;
+  }
+  .pframe{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:2px;
+    overflow:hidden;
+    background:var(--ground-2);
+  }
+  .pframe img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .pframe:hover img{transform:scale(1.04);}
+  .pframe::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(0,0,0,0.55) 0%, transparent 45%);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .pframe:hover::after{opacity:1;}
+  .pframe .cap{
+    position:absolute; left:16px; bottom:14px; z-index:2;
+    font-size:0.85rem; color:var(--ink);
+    opacity:0; transform:translateY(6px);
+    transition:all .25s ease;
+  }
+  .pframe:hover .cap{opacity:1; transform:translateY(0);}
+
+  /* ---------- Session info ---------- */
+  .session-info{
+    border-top:1px solid var(--line);
+    padding:80px 0 100px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  .session-info h2{font-size:clamp(1.8rem,3.4vw,2.4rem); margin-bottom:20px;}
+  .session-info p{color:var(--ink-dim); margin-bottom:16px; max-width:52ch;}
+  .session-list{list-style:none; margin-top:24px;}
+  .session-list li{
+    display:flex; justify-content:space-between;
+    padding:16px 0; border-bottom:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  .session-list li span:last-child{color:var(--moss);}
+
+  /* ---------- CTA ---------- */
+  .cta-strip{border-top:1px solid var(--line); padding:80px 0; text-align:left;}
+  .cta-strip h2{font-size:clamp(1.8rem,3.4vw,2.4rem); max-width:18ch; margin-bottom:16px;}
+  .cta-strip p{color:var(--ink-dim); max-width:50ch; margin-bottom:28px;}
+  .cta-strip a.email-btn{
+    display:inline-block; background:var(--moss-dim); color:var(--ink);
+    text-decoration:none; padding:14px 30px; border-radius:999px;
+    font-size:0.95rem; transition:background .2s ease;
+  }
+  .cta-strip a.email-btn:hover{background:var(--moss);}
+
+  footer{
+    border-top:1px solid var(--line); padding:32px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.82rem; color:var(--ink-dim); flex-wrap:wrap; gap:12px;
+  }
+  footer a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease;}
+  footer a:hover{color:var(--ink);}
+
+  @media (max-width:900px){
+    .portrait-gallery{grid-template-columns:repeat(2,1fr);}
+    .session-info{grid-template-columns:1fr; gap:36px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .portrait-gallery{grid-template-columns:1fr; gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="index.html" class="brand">Grace Wilson's <em>Photography</em></a>
+      <div class="navlinks">
+        <a href="index.html">Welcome</a>
+        <a href="about.html">About Me</a>
+        <a href="portraits.html" class="active">Portraits</a>
+        <a href="prints.html">Prints for Sale</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Portrait photography — single &amp; couple sessions</p>
+      <h1>Portraits</h1>
+      <p class="note">I shoot small, low-key portrait sessions for single people or couples — no large events. Have a look through some recent work below, then head to the <a href="contact.html">contact page</a> to book a session or ask a question.</p>
+    </div>
+
+    <div class="portrait-gallery">
+      <div class="pframe">
+        <img src="images/portrait-baby-toycar.jpg" alt="Portrait — baby with toy car">
+        <span class="cap">First steps</span>
+      </div>
+      <div class="pframe">
+        <img src="images/portrait-baby-football.jpg" alt="Baby portrait, black and white">
+        <span class="cap">First birthday</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="session-info">
+      <div>
+        <h2>How a session works</h2>
+        <p>Sessions are kept small and relaxed — just you, or you and a partner, on location or somewhere with good natural light. No big production, no crowds, just a proper portrait done well.</p>
+        <p>After the session, you'll get a fully edited gallery delivered as digital downloads, licensed for you to use as you please — social media, prints, wherever you'd like.</p>
+      </div>
+      <div>
+        <h2>Session details</h2>
+        <ul class="session-list">
+          <li><span>Single portrait session</span><span>From $120</span></li>
+          <li><span>Couple portrait session</span><span>From $150</span></li>
+          <li><span>Extra edited image</span><span>$15 each</span></li>
+          <li><span>Turnaround</span><span>~1 week</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cta-strip">
+      <h2>Ready to book a session?</h2>
+      <p>Send me a message with what you have in mind — location, timing, single or couple — and I'll get back to you.</p>
+      <a class="email-btn" href="contact.html">Get in touch</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Grace Wilson's Photography</span>
+    <div class="socials">
+      <a href="mailto:g.tootsphotography@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prints for Sale — Grace Wilson's Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eee7d8;
+    --ink-dim:#b9b2a2;
+    --ground:#15150f;
+    --ground-2:#1c1c14;
+    --line:#3a392c;
+    --moss:#6b7a52;
+    --moss-dim:#4c5a3a;
+    --rust:#9c6b3f;
+    --max:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; left:0; right:0; z-index:50;
+    padding:16px 0;
+    background:rgba(21,21,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:'Newsreader', serif; font-size:1.3rem; font-weight:500; text-decoration:none;}
+  .brand em{font-style:italic; color:var(--moss);}
+  .navlinks{display:flex; gap:36px; font-size:0.92rem; color:var(--ink-dim);}
+  .navlinks a{text-decoration:none; transition:color .2s ease;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks a.active{color:var(--ink);}
+  @media (max-width:900px){ .navlinks{display:none;} }
+
+  /* ---------- Page head ---------- */
+  .page-head{
+    padding:96px 0 56px;
+    border-bottom:1px solid var(--line);
+  }
+  .page-head p.eyebrow{color:var(--ink-dim); font-size:0.9rem; margin-bottom:14px; max-width:44ch;}
+  .page-head h1{font-size:clamp(2.4rem, 6vw, 4rem); max-width:14ch; line-height:1.05;}
+  .page-head .note{
+    margin-top:22px; color:var(--ink-dim); max-width:56ch; font-size:1rem;
+  }
+  .page-head .note a{color:var(--moss); text-decoration:underline;}
+
+  /* ---------- Filters ---------- */
+  .filters{display:flex; gap:10px; flex-wrap:wrap; margin:44px 0 40px;}
+  .filter-btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    background:transparent; color:var(--ink-dim);
+    border:1px solid var(--line);
+    padding:9px 18px; border-radius:999px;
+    font-size:0.85rem; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .filter-btn:hover{border-color:var(--moss); color:var(--ink);}
+  .filter-btn.active{background:var(--moss-dim); border-color:var(--moss-dim); color:var(--ink);}
+
+  /* ---------- Product grid ---------- */
+  .shop{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+    padding:0 0 120px;
+  }
+  .card{
+    display:flex; flex-direction:column;
+  }
+  .card-img{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:2px;
+    overflow:hidden;
+    background:var(--ground-2);
+    margin-bottom:16px;
+  }
+  .card-img .tex{position:absolute; inset:0; transition:transform .5s ease;}
+  .card:hover .card-img .tex{transform:scale(1.04);}
+  .card-img img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .card:hover .card-img img{transform:scale(1.04);}
+
+  .tex.portrait{background:
+    radial-gradient(ellipse at 50% 30%, rgba(238,231,216,0.14), transparent 55%),
+    linear-gradient(160deg,#211f18,#15150f);}
+  .tex.landscape{background:
+    linear-gradient(180deg, #24271c 0%, #1a1c14 55%, #101009 100%);}
+  .tex.landscape::before{content:'';position:absolute;left:0;right:0;bottom:0;height:35%;background:linear-gradient(0deg, rgba(107,122,82,0.28), transparent);}
+  .tex.animal{background:
+    radial-gradient(circle at 65% 40%, rgba(156,107,63,0.30), transparent 55%),
+    linear-gradient(200deg,#1e1c15,#141410);}
+  .tex.vehicle{background:
+    repeating-linear-gradient(100deg, rgba(238,231,216,0.05) 0, rgba(238,231,216,0.05) 2px, transparent 2px, transparent 22px),
+    linear-gradient(150deg,#1a1a14,#111108);}
+  .tex.building{background:
+    repeating-linear-gradient(0deg, rgba(238,231,216,0.06) 0, rgba(238,231,216,0.06) 2px, transparent 2px, transparent 26px),
+    linear-gradient(170deg,#1c1c15,#121209);}
+
+  .card-cat{
+    font-size:0.78rem; color:var(--ink-dim); margin-bottom:4px;
+  }
+  .card-title{
+    font-family:'Newsreader', serif; font-size:1.15rem; font-weight:500;
+    margin-bottom:8px;
+  }
+  .card-row{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:auto;
+  }
+  .card-price{font-size:0.95rem; color:var(--ink);}
+  .buy-btn{
+    font-size:0.82rem;
+    color:var(--moss);
+    text-decoration:none;
+    border-bottom:1px solid var(--moss-dim);
+    padding-bottom:2px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .buy-btn:hover{color:var(--ink); border-color:var(--ink);}
+
+  /* ---------- Bottom CTA ---------- */
+  .cta-strip{
+    border-top:1px solid var(--line);
+    padding:80px 0;
+    text-align:left;
+  }
+  .cta-strip h2{font-size:clamp(1.8rem,3.4vw,2.4rem); max-width:16ch; margin-bottom:16px;}
+  .cta-strip p{color:var(--ink-dim); max-width:50ch; margin-bottom:28px;}
+  .cta-strip a.email-btn{
+    display:inline-block;
+    background:var(--moss-dim);
+    color:var(--ink);
+    text-decoration:none;
+    padding:14px 30px;
+    border-radius:999px;
+    font-size:0.95rem;
+    transition:background .2s ease;
+  }
+  .cta-strip a.email-btn:hover{background:var(--moss);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.82rem; color:var(--ink-dim); flex-wrap:wrap; gap:12px;
+  }
+  footer a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease;}
+  footer a:hover{color:var(--ink);}
+
+  @media (max-width:900px){
+    .shop{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .shop{grid-template-columns:1fr; gap:32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="index.html" class="brand">Grace Wilson's <em>Photography</em></a>
+      <div class="navlinks">
+        <a href="index.html">Welcome</a>
+        <a href="about.html">About Me</a>
+        <a href="portraits.html">Portraits</a>
+        <a href="prints.html" class="active">Prints for Sale</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Digital prints — animals, vehicles, landscape &amp; buildings</p>
+      <h1>Prints for sale</h1>
+      <p class="note">Every image below is available as a high-resolution digital download, licensed for you to use as you please. Looking for portraits? Visit the <a href="portraits.html">portraits page</a>. To purchase, or if you'd like a size or crop that isn't shown, just email <a href="mailto:g.tootsphotography@gmail.com">g.tootsphotography@gmail.com</a> with the print name.</p>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="animal">Animals</button>
+      <button class="filter-btn" data-filter="vehicle">Vehicles</button>
+      <button class="filter-btn" data-filter="landscape">Landscape</button>
+      <button class="filter-btn" data-filter="building">Buildings</button>
+    </div>
+
+    <div class="shop" id="shop">
+
+      <div class="card" data-cat="landscape">
+        <div class="card-img"><img src="images/landscape-highland-loch.jpg" alt="Highland loch and mountains"></div>
+        <div class="card-cat">Landscape</div>
+        <div class="card-title">Highland Loch</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Highland%20Loch">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="animal">
+        <div class="card-img"><img src="images/animal-wood-duck.jpg" alt="Wood duck on a fence post"></div>
+        <div class="card-cat">Animal</div>
+        <div class="card-title">Wood Duck by the Pond</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Wood%20Duck%20by%20the%20Pond">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="vehicle">
+        <div class="card-img"><img src="images/vehicle-red-bmw.jpg" alt="Modified red BMW"></div>
+        <div class="card-cat">Vehicle</div>
+        <div class="card-title">Red BMW, Stanced</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Red%20BMW%2C%20Stanced">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="building">
+        <div class="card-img"><img src="images/building-church-door.jpg" alt="Church doorway under autumn tree"></div>
+        <div class="card-cat">Building</div>
+        <div class="card-title">Church Doorway, Autumn</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Church%20Doorway%2C%20Autumn">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="building">
+        <div class="card-img"><img src="images/building-workshop-shed.jpg" alt="Workshop shed in the highlands"></div>
+        <div class="card-cat">Building</div>
+        <div class="card-title">Highland Workshop</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Highland%20Workshop">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="landscape">
+        <div class="card-img"><img src="images/landscape-sunset-loch.jpg" alt="Sunset over a loch"></div>
+        <div class="card-cat">Landscape</div>
+        <div class="card-title">Sunset Over the Loch</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Sunset%20Over%20the%20Loch">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="vehicle">
+        <div class="card-img"><img src="images/vehicle-blue-mondeo.jpg" alt="Modified blue Ford Mondeo"></div>
+        <div class="card-cat">Vehicle</div>
+        <div class="card-title">Blue Mondeo</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Blue%20Mondeo">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="building">
+        <div class="card-img"><img src="images/building-cottage-shore.jpg" alt="Stone cottage by the shore"></div>
+        <div class="card-cat">Building</div>
+        <div class="card-title">Cottage by the Shore</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Cottage%20by%20the%20Shore">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="vehicle">
+        <div class="card-img"><img src="images/vehicle-red-wagon.jpg" alt="Red railway wagon in autumn"></div>
+        <div class="card-cat">Vehicle</div>
+        <div class="card-title">Railway Wagon, Autumn</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Railway%20Wagon%2C%20Autumn">Email to purchase</a>
+        </div>
+      </div>
+
+      <div class="card" data-cat="landscape">
+        <div class="card-img"><img src="images/landscape-tay-bridge.jpg" alt="Bridge over still water at dusk"></div>
+        <div class="card-cat">Landscape</div>
+        <div class="card-title">Bridge at Dusk</div>
+        <div class="card-row">
+          <span class="card-price">$15</span>
+          <a class="buy-btn" href="mailto:g.tootsphotography@gmail.com?subject=Print%20purchase%3A%20Bridge%20at%20Dusk">Email to purchase</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cta-strip">
+      <h2>Don't see what you're after?</h2>
+      <p>I've got more images than are listed here, and I'm always shooting new ones. Email me and I can send over options, sizes, or custom crops.</p>
+      <a class="email-btn" href="mailto:g.tootsphotography@gmail.com">Email g.tootsphotography@gmail.com</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Grace Wilson's Photography</span>
+    <div class="socials">
+      <a href="mailto:g.tootsphotography@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('#shop .card');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(c => {
+        const match = filter === 'all' || c.dataset.cat === filter;
+        c.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
