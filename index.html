@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Wilson's Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eee7d8;
+    --ink-dim:#b9b2a2;
+    --ground:#15150f;
+    --ground-2:#1c1c14;
+    --line:#3a392c;
+    --moss:#6b7a52;
+    --moss-dim:#4c5a3a;
+    --rust:#9c6b3f;
+    --max:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    padding:26px 0;
+    mix-blend-mode:normal;
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(21,21,15,0.92);
+    backdrop-filter:blur(6px);
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:'Newsreader', serif; font-size:1.3rem; font-weight:500;}
+  .brand em{font-style:italic; color:var(--moss);}
+  .navlinks{display:flex; gap:36px; font-size:0.92rem; color:var(--ink-dim);}
+  .navlinks a{text-decoration:none; transition:color .2s ease;}
+  .navlinks a:hover{color:var(--ink);}
+  .nav-toggle{display:none;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:160px 0 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    position:absolute; inset:0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    z-index:0;
+  }
+  .hero-tile{
+    position:relative;
+    background:linear-gradient(160deg, var(--ground-2), var(--ground));
+    overflow:hidden;
+  }
+  .hero-tile::before{
+    content:'';
+    position:absolute; inset:0;
+    opacity:0.55;
+  }
+  .hero-tile.t1::before{background:
+    radial-gradient(circle at 30% 20%, rgba(107,122,82,0.35), transparent 60%),
+    repeating-linear-gradient(115deg, rgba(238,231,216,0.05) 0px, rgba(238,231,216,0.05) 1px, transparent 1px, transparent 14px);}
+  .hero-tile.t2::before{background:
+    radial-gradient(circle at 70% 70%, rgba(156,107,63,0.30), transparent 65%),
+    repeating-linear-gradient(20deg, rgba(238,231,216,0.04) 0px, rgba(238,231,216,0.04) 1px, transparent 1px, transparent 18px);}
+  .hero-tile.t3::before{background:
+    radial-gradient(circle at 50% 30%, rgba(238,231,216,0.10), transparent 60%),
+    repeating-linear-gradient(160deg, rgba(238,231,216,0.05) 0px, rgba(238,231,216,0.05) 1px, transparent 1px, transparent 12px);}
+  .hero-tile.t4::before{background:
+    radial-gradient(circle at 40% 80%, rgba(107,122,82,0.28), transparent 60%),
+    repeating-linear-gradient(70deg, rgba(238,231,216,0.04) 0px, rgba(238,231,216,0.04) 1px, transparent 1px, transparent 16px);}
+  .hero-scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, var(--ground) 8%, rgba(21,21,15,0.55) 55%, rgba(21,21,15,0.15) 100%);
+    z-index:1;
+  }
+  .hero-content{position:relative; z-index:2;}
+  .hero-eyebrow{
+    font-size:0.85rem; color:var(--ink-dim);
+    margin-bottom:18px;
+    max-width:34ch;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 6.4rem);
+    line-height:0.98;
+    max-width:11ch;
+  }
+  .hero h1 i{font-style:italic; color:var(--moss);}
+  .hero-sub{
+    margin-top:28px;
+    max-width:46ch;
+    color:var(--ink-dim);
+    font-size:1.05rem;
+  }
+  .hero-meta{
+    display:flex; gap:40px; margin-top:48px; flex-wrap:wrap;
+    font-size:0.85rem; color:var(--ink-dim);
+  }
+  .hero-meta div{padding-left:16px; border-left:1px solid var(--line);}
+  .hero-meta strong{display:block; color:var(--ink); font-family:'Newsreader',serif; font-size:1.15rem; font-weight:500;}
+
+  /* ---------- Quick links ---------- */
+  #quicklinks{padding:100px 0 120px;}
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .quick-card{
+    display:block;
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:32px 28px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .quick-card:hover{border-color:var(--moss); background:var(--ground-2);}
+  .quick-card h3{font-size:1.3rem; margin-bottom:10px; font-weight:500;}
+  .quick-card p{color:var(--ink-dim); font-size:0.92rem; margin-bottom:20px;}
+  .quick-arrow{font-size:0.85rem; color:var(--moss);}
+  @media (max-width:900px){
+    .quick-grid{grid-template-columns:1fr;}
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.82rem; color:var(--ink-dim); flex-wrap:wrap; gap:12px;
+  }
+  footer .socials{display:flex; gap:20px;}
+  footer a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease;}
+  footer a:hover{color:var(--ink);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .navlinks{display:none;}
+    .hero h1{max-width:none;}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="index.html" class="brand">Grace Wilson's <em>Photography</em></a>
+      <div class="navlinks">
+        <a href="index.html">Welcome</a>
+        <a href="about.html">About Me</a>
+        <a href="prints.html">Prints for Sale</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-tile t1"></div>
+      <div class="hero-tile t2"></div>
+      <div class="hero-tile t3"></div>
+      <div class="hero-tile t4"></div>
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="wrap hero-content">
+      <p class="hero-eyebrow">Photography — portraits, animals, vehicles, landscape &amp; buildings</p>
+      <h1>Faces, wild things, wide open roads, <i>and buildings that hold still.</i></h1>
+      <p class="hero-sub">I'm Grace Wilson. I photograph portraits, animals, cars, landscapes, and architecture, and sell the results as digital downloads you're free to use.</p>
+      <div class="hero-meta">
+        <div><strong>Since '17</strong>behind the camera</div>
+        <div><strong>5</strong>subjects, one eye</div>
+        <div><strong>Digital</strong>downloads, ready to use</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quicklinks">
+    <div class="wrap">
+      <div class="quick-grid">
+        <a class="quick-card" href="about.html">
+          <h3>About Me</h3>
+          <p>Why I picked up a camera, and what I shoot now.</p>
+          <span class="quick-arrow">Read more →</span>
+        </a>
+        <a class="quick-card" href="prints.html">
+          <h3>Prints for Sale</h3>
+          <p>Browse the full collection and buy as a digital download.</p>
+          <span class="quick-arrow">View prints →</span>
+        </a>
+        <a class="quick-card" href="contact.html">
+          <h3>Contact</h3>
+          <p>Book a portrait session or ask about a custom print.</p>
+          <span class="quick-arrow">Get in touch →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Grace Wilson's Photography</span>
+    <div class="socials">
+      <a href="mailto:g.tootsphotography@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header background on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>
+
+</body>
+</html>
